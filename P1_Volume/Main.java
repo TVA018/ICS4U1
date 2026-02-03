@@ -11,7 +11,7 @@ public class Main {
         "4. Rectangular-based Pyramid",
         "5. Sphere",
         "6. Rectangular Prism",
-        "7. Conical Frustum",
+        "7. BONUS: Conical Frustum",
         "8. Quit",
         "> "
     );
@@ -77,7 +77,13 @@ public class Main {
         double prismLength = scanner.readInput("What is the length of the prism: ", positiveDoubleParser);
 
         double volume = (baseWidth * baseHeight * prismLength) / 2.0;
-        System.out.printf("\nThe volume of the triangular prism is: %.2f\n", volume);
+        System.out.printf(
+            "\n--> Triangular Prism <--\nParameters:\n\tBase Width: %s\n\tBase Height: %s\n\tPrism Length: %s\n\nVolume: %.2f\n", 
+            baseWidth,
+            baseHeight,
+            prismLength,
+            volume
+        );
     }
 
     /** Prompts the user for the dimensions of the cylinder and prints the volume */
@@ -86,7 +92,12 @@ public class Main {
         double height = scanner.readInput("What is the height of the cylinder: ", positiveDoubleParser);
 
         double volume = Math.PI * Math.pow(radius, 2) * height;
-        System.out.printf("\nThe volume of the cylinder is: %.2f\n", volume);
+        System.out.printf(
+            "\n--> Cylinder <--\nParameters:\n\tRadius: %s\n\tHeight: %s\n\nVolume: %.2f\n", 
+            radius,
+            height,
+            volume
+        );
     }
 
     /** Prompts the user for the dimensions of the cone and prints the volume */
@@ -95,7 +106,12 @@ public class Main {
         double height = scanner.readInput("What is the height of the cone: ", positiveDoubleParser);
 
         double volume = Math.PI * Math.pow(radius, 2) * height / 3.0;
-        System.out.printf("\nThe volume of the cone is: %.2f\n", volume);
+        System.out.printf(
+            "\n--> Cone <--\nParameters:\n\tRadius: %s\n\tHeight: %s\n\nVolume: %.2f\n", 
+            radius,
+            height,
+            volume
+        );
     }
 
     /** Prompts the user for the dimensions of the rectangular-based pyramid and prints the volume */
@@ -105,7 +121,13 @@ public class Main {
         double height = scanner.readInput("What is the height of the pyramid: ", positiveDoubleParser);
 
         double volume = baseLength * baseWidth * height / 3.0;
-        System.out.printf("\nThe volume of the rectangular-based pyramid is: %.2f\n", volume);
+        System.out.printf(
+            "\n--> Rectangular-base Pyramid <--\nParameters:\n\tBase Width: %s\n\tBase Length: %s\n\tPyramid Height: %s\n\nVolume: %.2f\n", 
+            baseWidth,
+            baseLength,
+            height,
+            volume
+        );
     }
 
     /** Prompts the user for the dimensions of the sphere and prints the volume */
@@ -113,7 +135,11 @@ public class Main {
         double radius = scanner.readInput("What is the radius of the sphere: ", positiveDoubleParser);
         double volume = (4.0/3.0) * Math.PI * Math.pow(radius, 3);
 
-        System.out.printf("\nThe volume of the sphere is: %.2f\n", volume);
+        System.out.printf(
+            "\n--> Sphere <--\nParameters:\n\tRadius: %s\n\nVolume: %.2f\n", 
+            radius,
+            volume
+        );
     }
 
     /** Prompts the user for the dimensions of the rectangular prism and prints the volume */
@@ -123,7 +149,13 @@ public class Main {
         double height = scanner.readInput("What is the height of the prism: ", positiveDoubleParser);
 
         double volume = length * width * height;
-        System.out.printf("\nThe volume of the rectangular prism is: %.2f\n", volume);
+        System.out.printf(
+            "\n--> Rectangular Prism <--\nParameters:\n\tLength: %s\n\tWidth: %s\n\tHeight: %s\n\nVolume: %.2f\n", 
+            length,
+            width,
+            height,
+            volume
+        );
     }
 
     /** Prompts the user for the dimensions of the conical frustum and prints the volume */
@@ -135,7 +167,13 @@ public class Main {
         // The formula of a conical frustum was found here: https://en.wikipedia.org/wiki/Frustum#:~:text=The%20volume%20of%20a%20circular%20cone%20frustum%20is
         double volume = (Math.PI * height / 3.0) * (Math.pow(baseRadius, 2) + baseRadius * topRadius + Math.pow(topRadius, 2));
 
-        System.out.printf("\nThe volume of the frustum is: %.2f\n", volume);
+        System.out.printf(
+            "\n--> Conical Frustum <--\nParameters:\n\tBase Radius: %s\n\tTop Radius: %s\n\tHeight: %s\n\nVolume: %.2f\n", 
+            baseRadius,
+            topRadius,
+            height,
+            volume
+        );
     }
 
     public static void main(String[] args) {
