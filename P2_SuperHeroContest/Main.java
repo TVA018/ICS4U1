@@ -3,7 +3,7 @@ public class Main {
     private static final HeroVotingManager votingManager = new HeroVotingManager(scanner);
 
     public static void main(String[] args) {
-        // if(!SecurityCheck.check(scanner)) return;
+        if(!SecurityCheck.check(scanner)) return; // Security check, can comment this out to skip
 
         while (votingManager.menuLoop()) {} // Continuously run "game loop"
 
