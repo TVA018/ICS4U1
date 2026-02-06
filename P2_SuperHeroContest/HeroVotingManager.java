@@ -82,12 +82,19 @@ public class HeroVotingManager {
      * @return The string in title case
     */
     private static String titleCase(String targetString) {
-        return String.join(" ", Arrays.asList(targetString.split(" ")).stream().map(word -> {
-            if(word.length() == 0) return "";
-            if(word.length() == 1) return word.toUpperCase();
+        return String.join(" ", Arrays.asList(
+            targetString.split(" ")).stream() // Split into an array of words delimiting by space
+            .map(word -> { // Map each word
+                if(word.length() == 0) return ""; // Edge case for empty string
+                if(word.length() == 1) return word.toUpperCase(); // Edge case for 1 letter word
 
-            return word.substring(0, 1).toUpperCase() + word.substring(1);
-        }).toArray(String[]::new));
+
+                return 
+                    word.substring(0, 1).toUpperCase() + // Capitalize the first letter
+                    word.substring(1).toLowerCase(); // Return the following letters in lowercase 
+            })
+            .toArray(String[]::new) // Convert back into a String array so it can be concatenated
+        );
     }
 
     /** @return a random index between 0 and the length of the superheroes array (exclusive) */
@@ -102,7 +109,7 @@ public class HeroVotingManager {
      * @return The removed element
     */
     private <T> T removeRandom(List<T> list) {
-        int index = (int)(list.size() * Math.random());
+        int index = (int)(list.size() * Math.random()); // Pick random index
         return list.remove(index);
     }
 
@@ -114,59 +121,88 @@ public class HeroVotingManager {
      * @return The superhero name in title case
     */
     private Optional<String> parseSecretPhrase(String secretPhrase) {
+        // Create a Matcher
         Matcher phraseMatcher = secretPhrasePattern.matcher(secretPhrase);
         boolean matches = phraseMatcher.find();
         
-        if(matches) {
+        if(matches) { // Does it match the format properly
+            // Trim the matched phrase because leading/trailing whitespaces shouldn't be used
             String titleCasedMatch = titleCase(phraseMatcher.group().trim());
-            System.out.println(titleCasedMatch);
 
             for(String name: SUPERHERO_NAMES) {
+                // If the input name is an actual valid name
                 if(titleCasedMatch.equals(name)) return Optional.of(name);
             }
         }
 
+        // If all checks failed then the phrase was not valid
         return Optional.empty();
     }
 
-    
+    /** Prints the superhero names list */
     public void printHeroesList(){
         System.out.println(String.join(", ", SUPERHERO_NAMES));
     }
 
-    public void randomizedVoting() {
+    private Integer[] getRandomlyDistributedVotes() {
         int numVoters = scanner.readInput("How many people are voting?\n> ", wholeNumberParser);
 
+        // This list stores the distributed votes. Each element doesn't 
+        // correspond to a specific hero, it will be randomly assigned later
         Integer[] votingDistribution = new Integer[SUPERHERO_NAMES.length];
+
+        // Make sure the array starts with 0
         Arrays.fill(votingDistribution, 0);
 
+        // Loop through the number of voters and randomly distribute it
         for(int i = 0; i < numVoters; i++) {
             votingDistribution[getRandomSuperheroIndex()]++;
         }
 
+        // Sort the distribution from greatest to least
         Arrays.sort(votingDistribution, (a, b) -> b - a);
 
+        return votingDistribution;
+    }
+
+    /** Runs a voting simulation where votes are completely random */
+    public void randomizedVoting() {
+        Integer[] votingDistribution = getRandomlyDistributedVotes();
+
+        // Set up the hero pool. This will be used to randomly pop hero names
         List<String> superheroesPool = new ArrayList<>(Arrays.asList(SUPERHERO_NAMES));
+
+        // The current rank within the iteration (for the following for loop)
         int currentRank = 0;
+
+        // The number of votes for the current rank (for the following for loop)
         int rankVotes = votingDistribution[0];
+
+        // The rankings for the simulation
         List<Ranking> rankings = new ArrayList<>();
-        rankings.add(new Ranking(currentRank, rankVotes));
+        rankings.add(new Ranking(currentRank, rankVotes)); // Create the initial ranking
 
-        for (int numVotes: votingDistribution) {
-            String randomHero = removeRandom(superheroesPool);
+        for (int numVotes: votingDistribution) { // Loop through the distributed votes
+            String randomHero = removeRandom(superheroesPool); // Pick a random hero to assign the votes to
 
-            if(numVotes == rankVotes) {
-                rankings.get(currentRank).heroes.add(randomHero);
-            } else {
-                currentRank++;
-                rankVotes = numVotes;
-                Ranking newRanking = new Ranking(currentRank, rankVotes);
-                newRanking.heroes.add(randomHero);
-                rankings.add(newRanking);
+            if(numVotes == rankVotes) { // If the distributed votes matches the current ranking (tie)
+                rankings.get(currentRank).heroes.add(randomHero); // Add this hero to the current ranking placement
+            } else { // Less votes, can't be more because the votingDistribution array is sorted
+                currentRank++; // Increment the rank ("lower" rank)
+                rankVotes = numVotes; // Update the number of votes required to match this rank
+                Ranking newRanking = new Ranking(currentRank, rankVotes); // Create a new ranking object
+                newRanking.heroes.add(randomHero); // Add the hero to the new rank
+                rankings.add(newRanking); // Add ranking to list
             }
         }
 
-        System.out.println(String.join("\n", rankings.stream().map(ranking -> ranking.toString()).toArray(String[]::new)));
+
+        // Print formatted ranking
+        System.out.println(String.join("\n", 
+            rankings.stream()
+            .map(ranking -> ranking.toString()) // Map to String representation
+            .toArray(String[]::new) // Collect into a String[] array
+        ));
     }
 
     public void riggedVoting() {
@@ -182,23 +218,37 @@ public class HeroVotingManager {
 
         int numVoters = scanner.readInput("How many people are voting?\n> ", wholeNumberParser);
 
+        // This list stores the distributed votes. Each element doesn't 
+        // correspond to a specific hero, it will be randomly assigned later
         Integer[] votingDistribution = new Integer[SUPERHERO_NAMES.length];
+
+        // Make sure the array starts with 0
         Arrays.fill(votingDistribution, 0);
 
+        // Loop through the number of voters and randomly distribute it
         for(int i = 0; i < numVoters; i++) {
             votingDistribution[getRandomSuperheroIndex()]++;
         }
 
-        Arrays.sort(votingDistribution, (a, b) -> b - a);
+        // Sort the distribution from greatest to least
+        Arrays.sort(votingDistribution, (a, b) -> b - a); 
 
+        // Set up the hero pool. This will be used to randomly pop hero names
         List<String> superheroesPool = new ArrayList<>(Arrays.asList(SUPERHERO_NAMES));
-        int currentRank = 0;
-        int rankVotes = votingDistribution[0];
-        List<Ranking> rankings = new ArrayList<>();
-        rankings.add(new Ranking(currentRank, rankVotes));
-        rankings.get(currentRank).heroes.add(riggedHero);
-        superheroesPool.remove(riggedHero);
 
+        // The current rank within the iteration (for the following for loop)
+        int currentRank = 0;
+
+        // The number of votes for the current rank (for the following for loop)
+        int rankVotes = votingDistribution[0];
+
+        // The rankings for the simulation
+        List<Ranking> rankings = new ArrayList<>();
+        rankings.add(new Ranking(currentRank, rankVotes)); // Add new rank to list
+        rankings.get(currentRank).heroes.add(riggedHero); // Add the rigged hero to the top rank
+        superheroesPool.remove(riggedHero); // Remove the rigged hero from the pool so they won't be picked
+
+        // Randomly distribute the rest of the heroes, see randomizedVoting() for explanation
         for (int i = 1; i < votingDistribution.length; i++) {
             int numVotes = votingDistribution[i];
             String randomHero = removeRandom(superheroesPool);
@@ -214,9 +264,18 @@ public class HeroVotingManager {
             }
         }
 
-        System.out.println(String.join("\n", rankings.stream().map(ranking -> ranking.toString()).toArray(String[]::new)));
+        // Print formatted ranking
+        System.out.println(String.join("\n", 
+            rankings.stream()
+            .map(ranking -> ranking.toString()) // Map to String representation
+            .toArray(String[]::new) // Collect into a String[] array
+        ));
     }
 
+    /**
+     * Prints the menu TUI and runs the corresponding function for each option
+     * @return whether the loop should continue or not
+    */
     public boolean menuLoop() {
         int choice = scanner.readInput(MENU_TEXT, menuChoiceParser);
 
