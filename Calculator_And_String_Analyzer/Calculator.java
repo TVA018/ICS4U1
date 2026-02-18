@@ -66,9 +66,9 @@ public class Calculator {
     }
 
     /** @return a random number between num1 (inclusive) and num2 (exclusive) */
-    public double randomBetweenNums() {
+    public int randomBetweenNums() {
         double offset = Math.random() * -difference; // multiply by negative difference so that it is (num2 - num1)
 
-        return num1 + offset;
+        return (int) (num1 + offset);
     }
 }
