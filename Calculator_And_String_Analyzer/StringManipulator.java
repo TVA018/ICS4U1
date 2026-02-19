@@ -38,7 +38,7 @@ public class StringManipulator {
         if(text1.length() <= 1) { // Resolve edge case of 0 or 1 letter
             text1Swapped = "";
         } else {
-            int midPoint = Math.ceilDiv(text1.length(), 2);
+            int midPoint = Math.floorDiv(text1.length(), 2);
             String firstHalf = text1.substring(0, midPoint);
             String secondHalf = text1.substring(midPoint);
             text1Swapped = secondHalf + firstHalf;

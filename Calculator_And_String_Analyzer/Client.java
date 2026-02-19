@@ -9,7 +9,10 @@ public class Client {
     };
 
     public static void main(String[] args) {
-        if(!testDefaults()) return;
+        if(!testDefaults()) {
+            ColourFormatter.println(ColourFormatter.ANSIColour.RED, "[!!] AT LEAST 1 TEST CASE FAILED [!!]");
+            return;
+        }
 
         ValidatedScanner scanner = new ValidatedScanner();
 
@@ -52,7 +55,22 @@ public class Client {
         // Test calculator
         Calculator calculator = new Calculator();
 
-        if(Tester.test(calculator.num1 + calculator.num2, calculator.add(), "Sum method failed")) testsPassed = false;
+        if(!Tester.test(calculator.num1 + calculator.num2, calculator.add(), "Sum method failed")) testsPassed = false;
+        if(!Tester.test(calculator.num1 - calculator.num2, calculator.subtract(), "Subtract method failed")) testsPassed = false;
+        if(!Tester.test(calculator.num1 * calculator.num2, calculator.multiply(), "Multiply method failed")) testsPassed = false;
+        if(!Tester.test(calculator.num1 / calculator.num2, calculator.divide(), "Divide method failed")) testsPassed = false;
+        if(!Tester.test(Math.pow(calculator.num1, calculator.num2), calculator.power(), "Power method failed")) testsPassed = false;
+        if(!Tester.test(Math.abs(calculator.num1 - calculator.num2), calculator.absoluteDifference(), "Absolute difference method failed")) testsPassed = false;
+        if(!Tester.test(Math.sqrt(calculator.num1 + calculator.num2), calculator.squareRootOfSum(), "Square root of sum method failed")) testsPassed = false;
+
+        // Test string manipulator
+        StringManipulator manipulator = new StringManipulator();
+
+        if(!Tester.test(manipulator.text1 + manipulator.text2, manipulator.combineStrings(), "Combine strings failed")) testsPassed = false;
+        if(!Tester.test((manipulator.text1 + manipulator.text2).length(), manipulator.getCombinedLength(), "Combined length failed")) testsPassed = false;
+        if(!Tester.test("He", manipulator.firstHalf(), "First half failed")) testsPassed = false;
+        if(!Tester.test(-1, manipulator.indexOfFirstLetter(), "Index of first letter failed")) testsPassed = false;
+        if(!Tester.test("lloHe", manipulator.swapFirstAndSecondHalf(), "Half swapping failed")) testsPassed = false;
 
         return testsPassed;
     }
