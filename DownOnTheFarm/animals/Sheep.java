@@ -18,7 +18,7 @@ public class Sheep {
     /** Whether the sheep is sleeping */
     private boolean isSleeping;
 
-    /** The furWeight of the sheep's fur in pounds (lbs) */
+    /** The weight of the sheep's fur in pounds (lbs) */
     public final double furWeight;
 
     /**
