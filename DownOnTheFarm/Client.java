@@ -14,6 +14,7 @@ public class Client {
 
     /** Tests the minimum requirements of the assignmnet */
     private static void testMinimumRequirements() {
+        // Create objects
         Cow franny = new Cow();
         Cow gretta = new Cow("Gretta", 100, 1, false);
 
@@ -23,6 +24,7 @@ public class Client {
         Pig piglet = new Pig();
         Pig pickles = new Pig("Yellow", 10, true, 567.88);
 
+        // Test functions
         franny.makeNoise();
         clucky.makeNoise();
         pickles.makeNoise();
@@ -31,6 +33,7 @@ public class Client {
         marshmallow.eatFood(10);
         piglet.upgradePenSize(3);
 
+        // Display information
         gretta.displayCow();
         marshmallow.displayChicken();
         piglet.displayPig();
@@ -38,9 +41,11 @@ public class Client {
 
     /** Tests level up portion of assignment */
     private static void testLevelUp() {
+        // Create sheeps
         Sheep mary = new Sheep();
         Sheep carl = new Sheep("Carl", 2, true, 54.6);
 
+        // Test functions
         mary.makeNoise();
 
         mary.displaysheep();
@@ -48,7 +53,10 @@ public class Client {
 
         System.out.println("Waking Carl up");
         carl.wake();
-
         carl.displaysheep();
+
+        System.out.println("Making Mary sleep");
+        mary.sleep();
+        mary.displaysheep();
     }
 }
