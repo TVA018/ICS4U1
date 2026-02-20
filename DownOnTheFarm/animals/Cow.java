@@ -2,10 +2,10 @@ package animals;
 
 public class Cow {
     private static final String cowInfoFormat = String.join("\n", 
-        "%s (Cow)",
-        "- Weight: %s lbs",
-        "- Age: %s year(s) old",
-        "- Gender: %s",
+        "Name: %s",
+        "Weight: %s lbs",
+        "Age: %s year(s) old",
+        "Gender: %s",
         "\n"
     );
 
@@ -38,13 +38,13 @@ public class Cow {
      * Creates a new cow with the default values:
      * <ul>
      * <li>Name = Franny</li>
-     * <li>Weight = 100</li>
+     * <li>Weight = 1400</li>
      * <li>Age = 5</li>
      * <li>Gender = false</li>
      * </ul>
      */
     public Cow() {
-        this("Franny", 100, 5, false);
+        this("Franny", 1400, 5, false);
     }
 
     /**
@@ -58,7 +58,7 @@ public class Cow {
      * Makes cow noises
      */
     public void makeNoise() {
-        System.out.println("MOOOOOOO!");
+        System.out.println("MOO MOO MOO");
     }
 
     /**
@@ -71,10 +71,10 @@ public class Cow {
     /**
      * Displays the information of the cow in the following format:
      * <br><br>
-     * Name (Cow):<br>
-     * - Weight: weight in pounds<br>
-     * - Age: age in years<br>
-     * - Gender: gender as a boolean (?)
+     * Name: name<br>
+     * Weight: weight in pounds<br>
+     * Age: age in years<br>
+     * Gender: gender as a boolean (?)
      */
     public void displayCow() {
         System.out.printf(cowInfoFormat, name, weight, age, gender);

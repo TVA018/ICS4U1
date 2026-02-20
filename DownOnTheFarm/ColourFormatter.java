@@ -1,5 +1,3 @@
-package util;
-
 public class ColourFormatter {
     /**
      * ANSI CODES FOR COLOURS

@@ -2,10 +2,10 @@ package animals;
 
 public class Chicken {
     private static final String chickenInfoFormat = String.join("\n", 
-        "%s (Chicken)",
-        "- Eggs laid per day: %s",
-        "- Is mean?: %s",
-        "- Weight: %s lbs",
+        "Breed: %s",
+        "Eggs Per Day: %s",
+        "Rude: %s",
+        "Weight: %s lbs",
         "\n"
     );
 
@@ -48,13 +48,33 @@ public class Chicken {
         this("Rhode Island Red", 1, false, 6.5);
     }
 
+    /** @return the weight of the chicken in pounds */
+    public double getWeight() {
+        return weight;
+    }
+
+    /**
+     * Makes the sound of a chicken
+     */
+    public void makeNoise() {
+        System.out.println("CLUCK CLUCK CLUCK");
+    }
+
+    /**
+     * Changes the weight of the chicken by the specified increment
+     * @param increment The change in the chicken's weight in pounds
+     */
+    public void eatFood(int increment) {
+        weight += increment;
+    }
+
     /**
      * Displays the information of the chicken in the following format:
      * <br><br>
-     * Breed (Chicken):<br>
-     * - Eggs laid per day: the number of eggs laid per day<br>
-     * - Is mean: whether the chicken is mean<br>
-     * - Weight: weight in pounds
+     * Breed: the breed of the chicken<br>
+     * Eggs Per Day: the number of eggs laid per day<br>
+     * Rude: whether the chicken is mean<br>
+     * Weight: weight in pounds
      */
     public void displayChicken() {
         System.out.printf(chickenInfoFormat, breed, eggLayRate, isMean, weight);
