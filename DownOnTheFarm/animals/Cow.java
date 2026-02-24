@@ -17,7 +17,7 @@ public class Cow {
     /** The age of the cow in years */
     private int age;
 
-    /** The gender of the cow (?) */
+    /** The gender of the cow (false = female, true = male). For the purpose of this assignment, we will pretend cows can be male. */
     public final boolean gender;
 
     /**
@@ -25,7 +25,7 @@ public class Cow {
      * @param name The name of the cow
      * @param weight The weight of the cow in pounds (lbs)
      * @param age The age of the cow in year(s)
-     * @param gender The gender of the cow (?)
+     * @param gender Whether the cow is male
      */
     public Cow(String name, double weight, int age, boolean gender) {
         this.name = name;
@@ -74,7 +74,7 @@ public class Cow {
      * Name: name<br>
      * Weight: weight in pounds<br>
      * Age: age in years<br>
-     * Gender: gender as a boolean (?)
+     * Gender: Whether the cow is male
      */
     public void displayCow() {
         System.out.printf(cowInfoFormat, name, weight, age, gender);
