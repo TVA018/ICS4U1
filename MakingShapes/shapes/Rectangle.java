@@ -13,12 +13,12 @@ public class Rectangle {
 
     /**
      * Creates a new rectangle with the provided side lengths
-     * @param length The length of the rectangle
-     * @param width The length of the rectangle
+     * @param sideLength1 A side length of the rectangle
+     * @param sideLength2 The other side length of the rectangle
      */
-    public Rectangle(double length, double width) {
-        this.length = length;
-        this.width = width;
+    public Rectangle(double sideLength1, double sideLength2) {
+        this.length = Math.max(sideLength1, sideLength2);
+        this.width = Math.min(sideLength1, sideLength2);
     }
 
     /** Creates a new 5x3 rectangle */
@@ -30,7 +30,7 @@ public class Rectangle {
      * Sets the length of the rectangle
      * @param length
      */
-    public void setLength(int length) {
+    public void setLength(double length) {
         this.length = length;
     }
 
@@ -43,13 +43,18 @@ public class Rectangle {
      * Sets the width of the rectangle
      * @param width
      */
-    public void setWidth(int width) {
+    public void setWidth(double width) {
         this.width = width;
     }
 
     /** @return the width of the rectangle */
     public double getWidth() {
         return width;
+    }
+
+    /** @return whether the rectangle's side lengths are within 0.1 of each other */
+    public boolean isSquare() {
+        return Math.abs(width - length) <= 0.1;
     }
 
     /** @return the perimeter of the rectangle via 2 * (length + width) */

@@ -1,10 +1,14 @@
+import shapes.Circle;
 import shapes.Rectangle;
 import shapes.Triangle;
 
 public class Client {
     public static void main(String[] args) {
+        System.out.println("Triangle tests:");
         testTriangle();
+        System.out.println("\nRectangle tests:");
         testRectangle();
+        System.out.println("\nCircle tests:");
         testCircle();
     }
 
@@ -45,6 +49,7 @@ public class Client {
         r3.setWidth(5.75);
         System.out.println(r3.isSquare());
     }
+
     public static void testCircle() {
         Circle c1 = new Circle();
         Circle c2 = new Circle(3.5);

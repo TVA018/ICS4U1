@@ -79,11 +79,11 @@ public class Triangle {
         return (shortestSide + mediumSide) > longestSide;
     }
 
-    /** @return whether the triangle is a right triangle */
+    /** @return whether the triangle is a right triangle. If c^2 - (a^2 + b^2) is within 0.1, then the triangle is considered to be
+     * a right triangle
+     */
     public boolean isRightTriangle() {
-        return 
-            Math.round(shortestSide * shortestSide + mediumSide * mediumSide) == 
-            Math.round(longestSide * longestSide); 
+        return Math.abs((shortestSide * shortestSide + mediumSide * mediumSide) - (longestSide * longestSide)) <= 0.1; 
     }
 
     /** @return the perimeter of the triangle via (side1 + side2 + side3) */
