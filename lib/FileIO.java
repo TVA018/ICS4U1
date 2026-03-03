@@ -1,0 +1,58 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class FileIO implements AutoCloseable {
+    public final File file;
+    private final BufferedReader reader;
+    private String fileText;
+
+    public FileIO(File file) throws IOException, FileNotFoundException {
+        this.file = file;
+
+        if(!file.exists()) file.createNewFile();
+
+        reader = new BufferedReader(new FileReader(file));
+
+        fileText = reader.readAllAsString();
+    }
+
+    public FileIO(String filePath) throws IOException {
+        this(new File(filePath));
+    }
+
+    public String readLines() {
+        return fileText;
+    }
+
+    public void append(String text) {
+        fileText += text;
+    }
+    
+    public void appendLine(String line) {
+        append(line + "\n");
+    }
+
+    public void overwrite(String newText) {
+        fileText = newText;
+    }
+
+    public void close(boolean shouldSave) throws IOException {
+        if(shouldSave) {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            writer.write(fileText);
+            writer.close();
+        }
+
+        reader.close();
+    }
+
+    @Override
+    public void close() throws IOException {
+        close(true);
+    }
+}
