@@ -38,35 +38,35 @@ public class TerminalTextFormatter {
 
     /**
      * Prints a string using the given flags
-     * @param str The string to print
+     * @param input The input value, will be converted to a string
      * @param flags The ANSI flags/escape codes to use
      */
-    public static void print(String str, ANSIFlag ...flags) {
-        System.out.print(applyFlags(str, flags));
+    public static <T> void print(T input, ANSIFlag ...flags) {
+        System.out.print(applyFlags(input, flags));
     }
 
     /**
      * Prints a string and end with a new-line using the given flags
-     * @param str The string to print
+     * @param input The input value, will be converted to a string
      * @param flags The ANSI flags/escape codes to use
      */
-    public static void println(String str, ANSIFlag ...flags) {
-        print(str + "\n", flags);
+    public static <T> void println(T input, ANSIFlag ...flags) {
+        print(input.toString() + "\n", flags);
     }
 
     /**
      * Apply the ANSI flags to the string provided
-     * @param str The string to print
+     * @param input The input value, will be converted to a string
      * @param flags The ANSI flags/escape codes to use
      * @return The newly formatted string
      */
-    public static String applyFlags(String str, ANSIFlag ...flags) {
+    public static <T> String applyFlags(T input, ANSIFlag ...flags) {
         StringBuilder startingFlagBuilder = new StringBuilder();
 
         for(ANSIFlag flag: flags) {
             startingFlagBuilder.append(flag.ANSI_CODE);
         }
 
-        return  startingFlagBuilder.toString() + str + ANSIFlag.RESET.ANSI_CODE;
+        return startingFlagBuilder.toString() + input.toString() + ANSIFlag.RESET.ANSI_CODE;
     }
 }
