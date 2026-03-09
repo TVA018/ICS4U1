@@ -25,22 +25,26 @@ public class FileIO implements AutoCloseable {
         this(new File(filePath));
     }
 
+    /** @return The file contents represented as text */
     public String readLines() {
         return fileText;
     }
 
+    /** Appends the {@code text} to the end of the file content */
     public void append(String text) {
         fileText += text;
     }
     
+    /** Appends the {@code line} to the end of the file content as a line (ends with new-line) */
     public void appendLine(String line) {
         append(line + "\n");
     }
 
+    /** Overwrites the text content of the file */
     public void overwrite(String newText) {
         fileText = newText;
     }
-
+    
     public void close(boolean shouldSave) throws IOException {
         if(shouldSave) {
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
