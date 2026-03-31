@@ -18,7 +18,7 @@ public class Game {
 
         int charType = Character.getType(character);
 
-        if(charType != Character.LOWERCASE_LETTER && charType != Character.UPPERCASE_LETTER) throw new InputMismatchException("Please eneter a valid alphabetical letter");
+        if(charType != Character.LOWERCASE_LETTER && charType != Character.UPPERCASE_LETTER) throw new InputMismatchException("Please enter a valid alphabetical letter");
 
         return Character.toUpperCase(character);
     };
