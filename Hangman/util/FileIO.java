@@ -34,7 +34,13 @@ public class FileIO implements AutoCloseable {
 
     /** @return The file contents represented as an array of lines */
     public String[] readLines() {
-        return fileText.split("\n");
+        String[] lines = fileText.split("\n");
+
+        for(int i = 0; i < lines.length; i++) {
+            lines[i] = lines[i].replace("\r", ""); // Remove carriage returns
+        }
+
+        return lines;
     }
 
     /** Appends the {@code text} to the end of the file content */
