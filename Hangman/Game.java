@@ -23,8 +23,6 @@ public class Game {
         return Character.toUpperCase(character);
     };
 
-    private final ValidatedScanner scanner = new ValidatedScanner();
-
     private static boolean cheatMode = false;
 
     private String chosenWord;
@@ -53,7 +51,7 @@ public class Game {
     }
 
     /** Starts a new game */
-    public void start() {
+    public void start(ValidatedScanner scanner) {
         Arrays.fill(guessedLetters, '\u0000'); // Reset guessed characters buffer
         int randomWordIndex = (int) (Math.random() * WORDS_LIST.length); // Index of a random word in the list
 
@@ -63,7 +61,7 @@ public class Game {
 
         TerminalTextFormatter.println("Game started!", ANSIFlag.YELLOW_TEXT);
 
-        while (loop()) { // Run game loop
+        while (loop(scanner)) { // Run game loop
             System.out.println(); // Extra line just for padding
         }
 
@@ -79,7 +77,7 @@ public class Game {
     /** Runs a single game loop
      * @return whether the game should continue
      */
-    private boolean loop() {
+    private boolean loop(ValidatedScanner scanner) {
         // Show guessed letters
         System.out.print("Guessed letters: ");
         for(int i = 0; i < guessedLetters.length; i++) {
