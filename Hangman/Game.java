@@ -50,7 +50,9 @@ public class Game {
         cheatMode = false;
     }
 
-    /** Starts a new game */
+    /** Starts a new game 
+     * @param scanner the scanner to play the game with
+    */
     public void start(ValidatedScanner scanner) {
         Arrays.fill(guessedLetters, '\u0000'); // Reset guessed characters buffer
         int randomWordIndex = (int) (Math.random() * WORDS_LIST.length); // Index of a random word in the list
@@ -75,6 +77,7 @@ public class Game {
     }
 
     /** Runs a single game loop
+     * @param scanner the scanner to play the game with
      * @return whether the game should continue
      */
     private boolean loop(ValidatedScanner scanner) {
