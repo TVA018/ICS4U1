@@ -1,38 +1,40 @@
-public class TerminalTextFormatter {
+public final class TerminalTextFormatter {
     private TerminalTextFormatter(){}
 
     /**
      * ANSI CODES FOR COLOURS
-    */
+     */
     public enum ANSIFlag {
-        RESET("0m"),
+        RESET("0"),
 
-        BOLD("1m"),
-        ITALIC("3m"),
-        UNDERLINE("4m"),
+        BOLD("1"),
+        ITALIC("3"),
+        UNDERLINE("4"),
 
-        BLACK_TEXT("30m"),
-        RED_TEXT("31m"),
-        GREEN_TEXT("32m"),
-        YELLOW_TEXT("33m"),
-        BLUE_TEXT("34m"),
-        PURPLE_TEXT("35m"),
-        CYAN_TEXT("36m"),
-        WHITE_TEXT("37m"),
-        
-        BLACK_BG("40m"),
-        RED_BG("41m"),
-        GREEN_BG("42m"),
-        YELLOW_BG("43m"),
-        BLUE_BG("44m"),
-        PURPLE_BG("45m"),
-        CYAN_BG("46m"),
-        WHITE_BG("47m");
+        BLACK_TEXT("30"),
+        GREY_TEXT("38;5;236"),
+        RED_TEXT("31"),
+        GREEN_TEXT("32"),
+        YELLOW_TEXT("33"),
+        BLUE_TEXT("34"),
+        PURPLE_TEXT("35"),
+        CYAN_TEXT("36"),
+        WHITE_TEXT("37"),
+
+        BLACK_BG("40"),
+        GREY_BG("48;5;236"),
+        RED_BG("41"),
+        GREEN_BG("42"),
+        YELLOW_BG("43"),
+        BLUE_BG("44"),
+        PURPLE_BG("45"),
+        CYAN_BG("46"),
+        WHITE_BG("47");
 
         public final String ANSI_CODE;
 
         ANSIFlag(String subcode) {
-            this.ANSI_CODE = "\u001B[" + subcode;
+            this.ANSI_CODE = "\u001B[" + subcode + "m";
         }
     }
 
