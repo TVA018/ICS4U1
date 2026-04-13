@@ -6,6 +6,10 @@ public class Polynomial {
     protected final PolynomialTerm[] terms;
     protected final String expression;
 
+    /**
+     * Constructs a new polynomial with the provided terms. Terms with the same degree will be automatically grouped.
+     * @param terms The terms of the Polynomial
+     */
     public Polynomial(PolynomialTerm ...terms) {
         if(terms.length == 0) throw new IllegalArgumentException("There must be at least 1 term for there to be a polynomial expression");
 
@@ -80,6 +84,11 @@ public class Polynomial {
         return terms[termIndex];
     }
 
+    /** @return The degree of the polynomial (greatest degree) */
+    public int getDegree() {
+        return terms[0].degree();
+    }
+
     /** @return the number of terms in this polynomial expression */
     public int getNumberOfTerms() {
         return terms.length;
@@ -87,7 +96,7 @@ public class Polynomial {
 
     @Override
     public String toString() {
-        return String.format("Degree %s, %s terms\n%s", terms[0].degree(), getNumberOfTerms(), expression);
+        return String.format("Degree %s, %s terms\n%s", getDegree(), getNumberOfTerms(), expression);
     }
 
     @Override

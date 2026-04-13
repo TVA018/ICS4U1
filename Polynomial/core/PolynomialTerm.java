@@ -1,5 +1,6 @@
 package core;
 
+/** A record that represents a polynomial term. That means the degree must be a non-negative integer */
 public record PolynomialTerm(double coefficient, int degree) {
     public PolynomialTerm {
         if(degree < 0) throw new IllegalArgumentException("The degree of a polynomial term must be non-negative");
